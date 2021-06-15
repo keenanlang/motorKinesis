@@ -24,7 +24,7 @@ int KinesisStepMotorAxis::getStatus()      { return SCC_GetStatusBits(this->seri
 void KinesisStepMotorAxis::moveRelative(double position)      { SCC_MoveRelative(this->serial, position); }
 void KinesisStepMotorAxis::moveToPosition(double position)    { SCC_MoveToPosition(this->serial, position); }
 
-bool KinesisStepMotorAxis::canHome()    { SCC_CanHome(this->serial); }
+bool KinesisStepMotorAxis::canHome()    { return SCC_CanHome(this->serial); }
 void KinesisStepMotorAxis::home()       { SCC_Home(this->serial); }
 
-int KinesisStepMotorAxis::stopImmediate()    { SCC_StopImmediate(this->serial); }
+int KinesisStepMotorAxis::stopImmediate()    { return SCC_StopImmediate(this->serial); }

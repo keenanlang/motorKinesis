@@ -19,8 +19,8 @@ KinesisController::KinesisController(const char* asyn_port, int serial, int type
 	                      0,
 	                      0)
 {
-	if      (type == THOR_LABS_DC_MOTOR)    { new ThorLabsDCMotorAxis(this, 0, serial); }
-	else if (type == THOR_LABS_STEP_MOTOR)  { new ThorLabsStepMotorAxis(this, 0, serial); }
+	if      (type == KINESIS_DC_MOTOR)    { new ThorLabsDCMotorAxis(this, 0, serial); }
+	else if (type == KINESIS_STEP_MOTOR)  { new ThorLabsStepMotorAxis(this, 0, serial); }
 	
 	startPoller(movingPollPeriod, idlePollPeriod, 2);
 }

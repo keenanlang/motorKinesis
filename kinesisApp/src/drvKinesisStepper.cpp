@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "drvKinesis.h"
 #include "Thorlabs.MotionControl.KCube.StepperMotor.h"
 
@@ -5,10 +7,34 @@
 /*
  * Stepper Motor Implementation
  */
-int KinesisStepMotorAxis::connect()        
+KinesisStepMotorAxis::KinesisStepMotorAxis(KinesisController* control, int axisNo, int serialNo)
+:KinesisAxis(control, axisNo, serialNo)
+{
+    this->connect();
+}
+
+KinesisStepMotorAxis::~KinesisStepMotorAxis()
+{
+    this->disableChannel();
+    this->stopPoll();
+    this->disconnect();
+}
+
+void KinesisStepMotorAxis::connect()        
 {
     TLI_BuildDeviceList();
-    return SCC_Open(this->serial); 
+    int success = SCC_Open(this->serial); 
+    
+    if (success == 0)
+    {
+        // start the device polling at 200ms intervals
+        this->startPoll(200);
+        this->enableChannel();
+    }
+    else
+    {
+        printf("Error Connecting: %d\n", success);
+    }
 }
 void KinesisStepMotorAxis::disconnect()    { SCC_Close(this->serial); }
 

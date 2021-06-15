@@ -6,14 +6,18 @@ DBD += devKinesis.dbd
 
 LIBRARY_IOC = ThorLabsUSB
 
-USR_INCLUDES = -I"C:/Program Files/Thorlabs/Kinesis"
+USR_INCLUDES = -I$(THORLABS_DIR)
 
 SRCS += drvKinesis.cpp
 SRCS += drvKinesisStepper.cpp
 SRCS += drvKinesisDC.cpp
 
-ThorLabsUSB_LIBS += Thorlabs.MotionControl.KCube.DCServo
-ThorLabsUSB_LIBS += Thorlabs.MotionControl.KCube.StepperMotor
+Thorlabs.MotionControl.KCube.DCServo_DIRS += $(THORLABS_DIR)
+ThorLabsUSB_USR_LIBS += Thorlabs.MotionControl.KCube.DCServo
+
+Thorlabs.MotionControl.KCube.StepperMotor_DIRS += $(THORLABS_DIR)
+ThorLabsUSB_USR_LIBS += Thorlabs.MotionControl.KCube.StepperMotor
+
 ThorLabsUSB_LIBS += motor asyn
 ThorLabsUSB_LIBS += $(EPICS_BASE_IOC_LIBS)
 

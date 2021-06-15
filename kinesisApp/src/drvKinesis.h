@@ -8,7 +8,7 @@ enum
 {
 	KINESIS_DC_MOTOR,
 	KINESIS_STEP_MOTOR,
-}
+};
 
 class epicsShareClass KinesisController;
 
@@ -49,7 +49,7 @@ class epicsShareClass KinesisAxis : public asynMotorAxis
 		int axisIndex_;
 		
 		char serial[16];
-}
+};
 
 class epicsShareClass KinesisDCMotorAxis : public KinesisAxis
 {

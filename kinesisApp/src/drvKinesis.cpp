@@ -39,28 +39,8 @@ KinesisAxis::KinesisAxis(KinesisController* pc, int axisNo, int serial_no)
 {
 	sprintf_s(this->serial, "%d", serial_no);
 	
-	int success = this->connect();
-	
-	if(success == 0)
-	{
-		// start the device polling at 200ms intervals
-		this->startPoll(200);
-		this->enableChannel();
-	}
-	else
-	{
-		printf("Error Connecting: %d\n", success);
-	}
-	
 	setDoubleParam(pC_->motorEncoderPosition_, 0.0);
 	callParamCallbacks();
-}
-
-KinesisAxis::~KinesisAxis()
-{
-	this->disableChannel();
-	this->stopPoll(); 
-	this->disconnect();
 }
 
 asynStatus KinesisAxis::move(double position, int relative, double minVelocity, double maxVelocity, double acceleration)

@@ -16,30 +16,29 @@ class epicsShareClass KinesisAxis : public asynMotorAxis
 {
 	public:
 		KinesisAxis(KinesisController* controller, int axisNo, int serialNo);
-		~KinesisAxis();
 		
 		asynStatus move(double position, int relative, double min_velocity, double max_velocity, double acceleration);
 		asynStatus home(double min_velocity, double max_velocity, double acceleration, int forwards);
 		asynStatus stop(double acceleration);
 		asynStatus poll(bool* moving);
 		
-		virtual int connect();
-		virtual void disconnect();
+		virtual void connect() = 0;
+		virtual void disconnect() = 0;
 		
-		virtual void startPoll(int interval);
-		virtual void stopPoll();
+		virtual void startPoll(int interval) = 0;
+		virtual void stopPoll() = 0;
 		
-		virtual void enableChannel();
-		virtual void disableChannel();
+		virtual void enableChannel() = 0;
+		virtual void disableChannel() = 0;
 		
-		virtual int getPosition();
-		virtual int getStatus();
+		virtual int getPosition() = 0;
+		virtual int getStatus() = 0;
 		
-		virtual void moveRelative(double position);
-		virtual void moveToPosition(double position);
+		virtual void moveRelative(double position) = 0;
+		virtual void moveToPosition(double position) = 0;
 		
-		virtual bool canHome();
-		virtual void home();
+		virtual bool canHome() = 0;
+		virtual void home() = 0;
 		
 		virtual int stopImmediate();
 		
@@ -57,7 +56,7 @@ class epicsShareClass KinesisDCMotorAxis : public KinesisAxis
 		KinesisDCMotorAxis(KinesisController* controller, int axisNo, int serialNo);
 		~KinesisDCMotorAxis();
 		
-		int connect();
+		void connect();
 		void disconnect();
 		
 		void startPoll(int interval);
@@ -84,7 +83,7 @@ class epicsShareClass KinesisStepMotorAxis : public KinesisAxis
 		KinesisStepMotorAxis(KinesisController* controller, int axisNo, int serialNo);
 		~KinesisStepMotorAxis();
 		
-		int connect();
+		void connect();
 		void disconnect();
 		
 		void startPoll(int interval);

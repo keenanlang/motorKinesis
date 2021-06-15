@@ -36,7 +36,7 @@ class epicsShareClass KinesisAxis : public asynMotorAxis
 		virtual int getStatus();
 		
 		virtual void moveRelative(double position);
-		virtual void modeToPosition(double position);
+		virtual void moveToPosition(double position);
 		
 		virtual bool canHome();
 		virtual void home();

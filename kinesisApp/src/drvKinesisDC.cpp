@@ -1,13 +1,39 @@
+#include <stdlib.h>
+
 #include "drvKinesis.h"
 #include "Thorlabs.MotionControl.KCube.DCServo.h"
 
 /*
  * DC Motor Implementation
  */
-int KinesisDCMotorAxis::connect()        
+KinesisDCMotorAxis::KinesisDCMotorAxis(KinesisController* control, int axisNo, int serialNo)
+:KinesisAxis(control, axisNo, serialNo)
+{
+    this->connect();
+}
+
+KinesisDCMotorAxis::~KinesisDCMotorAxis()
+{
+    this->disableChannel();
+    this->stopPoll();
+    this->disconnect();
+}
+
+void KinesisDCMotorAxis::connect()        
 {
     TLI_BuildDeviceList();
-    return CC_Open(this->serial); 
+    int success = CC_Open(this->serial); 
+    
+    if (success == 0)
+    {
+        // start the device polling at 200ms intervals
+        this->startPoll(200);
+        this->enableChannel();
+    }
+    else
+    {
+        printf("Error Connecting: %d\n", success);
+    }
 }
 void KinesisDCMotorAxis::disconnect()    { CC_Close(this->serial); }
 

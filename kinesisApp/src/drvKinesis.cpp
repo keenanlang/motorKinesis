@@ -25,18 +25,18 @@ KinesisController::KinesisController(const char* asyn_port, int serial, int type
 	startPoller(movingPollPeriod, idlePollPeriod, 2);
 }
 
-KinesisMotorAxis* KinesisController::getAxis(asynUser* pasynUser)
+KinesisAxis* KinesisController::getAxis(asynUser* pasynUser)
 { 
-	return static_cast<KinesisMotorAxis*>(asynMotorController::getAxis(pasynUser));
+	return static_cast<KinesisAxis*>(asynMotorController::getAxis(pasynUser));
 }
 
-KinesisMotorAxis* KinesisController::getAxis(int axis)
+KinesisAxis* KinesisController::getAxis(int axis)
 { 
-	return static_cast<KinesisMotorAxis*>(asynMotorController::getAxis(axis)); 
+	return static_cast<KinesisAxis*>(asynMotorController::getAxis(axis)); 
 }
 
 
-KinesisMotorAxis::KinesisMotorAxis(KinesisController* pc, int axisNo, int serial_no)
+KinesisAxis::KinesisAxis(KinesisController* pc, int axisNo, int serial_no)
 	: asynMotorAxis(pc, axisNo),
 	  pC_(pc)
 {
@@ -47,9 +47,9 @@ KinesisMotorAxis::KinesisMotorAxis(KinesisController* pc, int axisNo, int serial
 	int success = this->connect();
 	
 	if(success == 0)
-    {
+	{
 		// start the device polling at 200ms intervals
-        this->startPoll(200);
+		this->startPoll(200);
 		this->enableChannel();
 	}
 	else
@@ -61,14 +61,14 @@ KinesisMotorAxis::KinesisMotorAxis(KinesisController* pc, int axisNo, int serial
 	callParamCallbacks();
 }
 
-KinesisMotorAxis::~KinesisMotorAxis()
+KinesisAxis::~KinesisAxis()
 {
 	this->disableChannel();
 	this->stopPoll(); 
 	this->disconnect();
 }
 
-asynStatus KinesisMotorAxis::move(double position, int relative, double minVelocity, double maxVelocity, double acceleration)
+asynStatus KinesisAxis::move(double position, int relative, double minVelocity, double maxVelocity, double acceleration)
 {	
 	if (relative)    { this->moveRelative(position); }
 	else             { this->moveToPosition(position); }
@@ -76,14 +76,14 @@ asynStatus KinesisMotorAxis::move(double position, int relative, double minVeloc
 	return asynSuccess;
 }
 
-asynStatus KinesisMotorAxis::home(double minVelocity, double maxVelocity, double acceleration, int forwards)
+asynStatus KinesisAxis::home(double minVelocity, double maxVelocity, double acceleration, int forwards)
 {
 	if (this->canHome())    { this->home();	}
 	
 	return asynSuccess;
 }
 
-asynStatus KinesisMotorAxis::poll(bool* moving)
+asynStatus KinesisAxis::poll(bool* moving)
 {
 	int pos = this->getPosition();
 	int status = this->getStatus();
@@ -114,7 +114,7 @@ asynStatus KinesisMotorAxis::poll(bool* moving)
 	return asynSuccess;
 }
 
-asynStatus KinesisMotorAxis::stop(double acceleration)
+asynStatus KinesisAxis::stop(double acceleration)
 {
 	this->stopImmediate();
 	

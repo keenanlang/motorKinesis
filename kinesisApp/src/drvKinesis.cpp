@@ -187,8 +187,6 @@ extern "C" void KinesisControllerConfig(const char* asyn_port, int serial, const
 	{
 		printf("Unknown motor type: %s\n", type);
 	}
-	
-	return asynSuccess;
 }
 
 static const iocshArg KinesisControllerArg0 = {"Motor Port Name", iocshArgString};

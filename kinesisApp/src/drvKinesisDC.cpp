@@ -23,7 +23,7 @@ int KinesisDCMotorAxis::getStatus()      { return CC_GetStatusBits(this->serial)
 void KinesisDCMotorAxis::moveRelative(double position)      { CC_MoveRelative(this->serial, position); }
 void KinesisDCMotorAxis::moveToPosition(double position)    { CC_MoveToPosition(this->serial, position); }
 
-bool KinesisDCMotorAxis::canHome()    { CC_CanHome(this->serial); }
+bool KinesisDCMotorAxis::canHome()    { return CC_CanHome(this->serial); }
 void KinesisDCMotorAxis::home()       { CC_Home(this->serial); }
 
-int KinesisDCMotorAxis::stopImmediate()    { CC_StopImmediate(this->serial); }
+int KinesisDCMotorAxis::stopImmediate()    { return CC_StopImmediate(this->serial); }

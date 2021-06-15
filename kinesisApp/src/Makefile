@@ -12,8 +12,8 @@ SRCS += drvKinesis.cpp
 SRCS += drvKinesisStepper.cpp
 SRCS += drvKinesisDC.cpp
 
-ThorLabsUSB_LIBS += Thorlabs.MotionControl.Benchtop.DCServo
-ThorLabsUSB_LIBS += Thorlabs.MotionControl.Benchtop.StepperMotor
+ThorLabsUSB_LIBS += Thorlabs.MotionControl.KCube.DCServo
+ThorLabsUSB_LIBS += Thorlabs.MotionControl.KCube.StepperMotor
 ThorLabsUSB_LIBS += motor asyn
 ThorLabsUSB_LIBS += $(EPICS_BASE_IOC_LIBS)
 

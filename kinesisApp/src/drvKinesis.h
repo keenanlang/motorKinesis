@@ -109,10 +109,10 @@ class epicsShareClass KinesisController : public asynMotorController
 {
 	public:
 		KinesisController(const char* portName, int serialNo, double movingPollPeriod, double idlePollPeriod);
-		KinesisMotorAxis* getAxis(asynUser* pasynuser);
-		KinesisMotorAxis* getAxis(int axis);
+		KinesisAxis* getAxis(asynUser* pasynuser);
+		KinesisAxis* getAxis(int axis);
 		
-	friend class KinesisMotorAxis;
+	friend class KinesisAxis;
 };
 
 

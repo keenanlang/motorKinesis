@@ -5,9 +5,6 @@
 
 #include "drvKinesis.h"
 
-#include "Thorlabs.MotionControl.KCube.DCServo.h"
-#include "Thorlabs.MotionControl.KCube.StepperMotor.h"
-
 KinesisController::KinesisController(const char* asyn_port, int serial, int type, double movingPollPeriod, double idlePollPeriod)
 	: asynMotorController(asyn_port,
 	                      1,
@@ -41,8 +38,6 @@ KinesisAxis::KinesisAxis(KinesisController* pc, int axisNo, int serial_no)
 	  pC_(pc)
 {
 	sprintf_s(this->serial, "%d", serial_no);
-	
-	TLI_BuildDeviceList();
 	
 	int success = this->connect();
 	
@@ -120,54 +115,6 @@ asynStatus KinesisAxis::stop(double acceleration)
 	
 	return asynSuccess;
 }
-
-/*
- * DC Motor Implementation
- */
-int KinesisDCMotorAxis::connect()        { return CC_Open(this->serial); }
-void KinesisDCMotorAxis::disconnect()    { CC_Close(this->serial); }
-
-void KinesisDCMotorAxis::startPoll(int interval)    { CC_StartPolling(this->serial, interval); }
-void KinesisDCMotorAxis::stopPoll()                 { CC_StopPolling(this->serial); }
-
-void KinesisDCMotorAxis::enableChannel()    { CC_EnableChannel(this->serial); }
-void KinesisDCMotorAxis::disableChannel()   { CC_DisableChannel(this->serial); }
-
-int KinesisDCMotorAxis::getPosition()    { return CC_GetPosition(this->serial); }
-int KinesisDCMotorAxis::getStatus()      { return CC_GetStatusBits(this->serial); }
-
-void KinesisDCMotorAxis::moveRelative(double position)      { CC_MoveRelative(this->serial, position); }
-void KinesisDCMotorAxis::moveToPosition(double position)    { CC_MoveToPosition(this->serial, position); }
-
-bool KinesisDCMotorAxis::canHome()    { CC_CanHome(this->serial); }
-void KinesisDCMotorAxis::home()       { CC_Home(this->serial); }
-
-int KinesisDCMotorAxis::stopImmediate()    { CC_StopImmediate(this->serial); }
-
-
-/*
- * Stepper Motor Implementation
- */
-int KinesisStepMotorAxis::connect()        { return SCC_Open(this->serial); }
-void KinesisStepMotorAxis::disconnect()    { SCC_Close(this->serial); }
-
-void KinesisStepMotorAxis::startPoll(int interval)    { SCC_StartPolling(this->serial, interval); }
-void KinesisStepMotorAxis::stopPoll()                 { SCC_StopPolling(this->serial); }
-
-void KinesisStepMotorAxis::enableChannel()    { SCC_EnableChannel(this->serial); }
-void KinesisStepMotorAxis::disableChannel()   { SCC_DisableChannel(this->serial); }
-
-int KinesisStepMotorAxis::getPosition()    { return SCC_GetPosition(this->serial); }
-int KinesisStepMotorAxis::getStatus()      { return SCC_GetStatusBits(this->serial); }
-
-void KinesisStepMotorAxis::moveRelative(double position)      { SCC_MoveRelative(this->serial, position); }
-void KinesisStepMotorAxis::moveToPosition(double position)    { SCC_MoveToPosition(this->serial, position); }
-
-bool KinesisStepMotorAxis::canHome()    { SCC_CanHome(this->serial); }
-void KinesisStepMotorAxis::home()       { SCC_Home(this->serial); }
-
-int KinesisStepMotorAxis::stopImmediate()    { SCC_StopImmediate(this->serial); }
-
 
 
 extern "C" void KinesisControllerConfig(const char* asyn_port, int serial, const char* type, double movingPollPeriod, double idlePollPeriod)

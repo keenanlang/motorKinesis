@@ -2,7 +2,7 @@
 TOP = ../..
 include $(TOP)/configure/CONFIG
 
-DBD += ThorLabsUSB.dbd
+DBD += devKinesis.dbd
 
 LIBRARY_IOC = ThorLabsUSB
 

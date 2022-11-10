@@ -40,9 +40,9 @@ class epicsShareClass KinesisAxis : public asynMotorAxis
 		virtual bool canHome() = 0;
 		virtual void home() = 0;
 		
-		virtual int stopImmediate();
+		virtual int stopImmediate() = 0;
 		
-	private:
+	protected:
 		KinesisController* pC_;
 		
 		int axisIndex_;

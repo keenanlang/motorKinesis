@@ -1,5 +1,7 @@
 #include <stdlib.h>
 
+#define epicsExportSharedSymbols
+
 #include "drvKinesis.h"
 #include "Thorlabs.MotionControl.KCube.DCServo.h"
 

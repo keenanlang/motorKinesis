@@ -69,7 +69,7 @@ class epicsShareClass KinesisDCMotorAxis : public KinesisAxis
 		int getStatus();
 		
 		void moveRelative(double position);
-		void modeToPosition(double position);
+		void moveToPosition(double position);
 		
 		bool canHome();
 		void home();
@@ -96,7 +96,7 @@ class epicsShareClass KinesisStepMotorAxis : public KinesisAxis
 		int getStatus();
 		
 		void moveRelative(double position);
-		void modeToPosition(double position);
+		void moveToPosition(double position);
 		
 		bool canHome();
 		void home();

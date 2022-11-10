@@ -12,11 +12,11 @@ SRCS += drvKinesis.cpp
 SRCS += drvKinesisStepper.cpp
 SRCS += drvKinesisDC.cpp
 
-Thorlabs.MotionControl.KCube.DCServo_DIRS += $(THORLABS_DIR)
-ThorLabsUSB_USR_LIBS += Thorlabs.MotionControl.KCube.DCServo
+Thorlabs.MotionControl.KCube.DCServo_DIR += $(THORLABS_DIR)
+ThorLabsUSB_DLL_LIBS += Thorlabs.MotionControl.KCube.DCServo
 
-Thorlabs.MotionControl.KCube.StepperMotor_DIRS += $(THORLABS_DIR)
-ThorLabsUSB_USR_LIBS += Thorlabs.MotionControl.KCube.StepperMotor
+Thorlabs.MotionControl.KCube.StepperMotor_DIR += $(THORLABS_DIR)
+ThorLabsUSB_DLL_LIBS += Thorlabs.MotionControl.KCube.StepperMotor
 
 ThorLabsUSB_LIBS += motor asyn
 ThorLabsUSB_LIBS += $(EPICS_BASE_IOC_LIBS)

@@ -1,2 +1,2 @@
 #Usually in C:/Program Files/Thorlabs/Kinesis, but the space in the filepath can cause issues
-THORLABS_DIR=D:/epics/kinesis
+THORLABS_DIR=C:/Progra~1/Thorlabs/Kinesis
